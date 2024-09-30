@@ -22,7 +22,33 @@ module.exports = {
                 plugins: ['@babel/plugin-syntax-jsx'] 
               }
             }
-          }
+          },
+
+          {
+            test: /\.ts[x]?$/,
+            exclude: /node_modules/,
+            use: 'ts-loader',
+          },
+
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              'css-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    ident: 'postcss',
+                    plugins: [
+                      require('tailwindcss'),
+                      require('autoprefixer'),
+                    ],
+                  },
+                },
+              },
+            ],
+          },
         ]
       },
       resolve: {
